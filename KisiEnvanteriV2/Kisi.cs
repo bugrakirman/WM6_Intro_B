@@ -76,7 +76,6 @@ namespace KisiEnvanteriV2
                 this._email = value;
             }
         }
-
         public string TCKN
         {
             get
@@ -100,6 +99,7 @@ namespace KisiEnvanteriV2
             }
         }
 
+        public byte[] Fotograf { get; set; }
         private void NameValid(string value, string propertyName)
         {
             foreach (char harf in value)

@@ -82,6 +82,10 @@ namespace KisiEnvanteriV2
             txtTel.Text = seciliKisi.Telefon;
             txtEmail.Text = seciliKisi.Email;
             txtTckn.Text = seciliKisi.TCKN;
+            if (seciliKisi.Fotograf!=null && seciliKisi.Fotograf.Length>0)
+            {
+                pictureBox1.Image = new Bitmap(new MemoryStream(seciliKisi.Fotograf));
+            }
         }
 
         private void FormuTemizle()
@@ -108,6 +112,10 @@ namespace KisiEnvanteriV2
                 {
                     lst.Items.Clear();
                 }
+                else if (control is PictureBox pbox)
+                {
+                    pbox.Image = null;
+                }
             }
         }
 
@@ -121,6 +129,11 @@ namespace KisiEnvanteriV2
                 yeniKisi.Telefon = txtTel.Text;
                 yeniKisi.Email = txtEmail.Text;
                 yeniKisi.TCKN = txtTckn.Text;
+                if (memoryStream.Length > 0)
+                {
+                    yeniKisi.Fotograf = memoryStream.ToArray();
+                }
+                memoryStream = new MemoryStream();
 
                 MessageBox.Show($"hosgeldin {yeniKisi.Ad} {yeniKisi.Soyad}");
                 Kisiler.Add(yeniKisi);
@@ -215,6 +228,28 @@ namespace KisiEnvanteriV2
                 {
                     MessageBox.Show("bir hata oluştu "+ex.Message);
                 }
+            }
+        }
+        MemoryStream memoryStream = new MemoryStream();
+        int bufferSize = 64;
+        byte[] resimArray = new byte[64];
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            dosyaAc.Title = "bir foto seç";
+            dosyaAc.Filter= "(JPG Dosyası) | *.jpg";
+            dosyaAc.Multiselect = false;
+            dosyaAc.FileName= string.Empty;
+            dosyaAc.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            if (dosyaAc.ShowDialog()==DialogResult.OK)
+            {
+                FileStream dosya = File.OpenRead(dosyaAc.FileName);
+                while (dosya.Read(resimArray,0,bufferSize)!=0)
+                {
+                    memoryStream.Write(resimArray, 0, resimArray.Length);
+                }
+                dosya.Close();
+                dosya.Dispose();
+                pictureBox1.Image = new Bitmap(memoryStream);
             }
         }
     }

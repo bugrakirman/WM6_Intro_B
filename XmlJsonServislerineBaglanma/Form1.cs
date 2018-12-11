@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace XmlJsonServislerineBaglanma
         }
         private List<Doviz> dovizler;
         private FourFactory fourFactory;
-        private int sayac=0;
+        private int sayac = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
             var doviz = dovizler[sayac++ % dovizler.Count];
@@ -32,7 +33,7 @@ namespace XmlJsonServislerineBaglanma
                 //listBox1.DisplayMember = "Ad";     ezmek yerine kullanılabilir ama tek satır yazılır
                 //listBox1.ValueMember = "Satis";
                 timer1.Start();
-                
+
             }
             catch (Exception ex)
             {
@@ -47,14 +48,49 @@ namespace XmlJsonServislerineBaglanma
 
             Doviz seciliDoviz = listBox1.SelectedItem as Doviz;
             this.Text = $"{seciliDoviz.Birim} {seciliDoviz.Ad} - {seciliDoviz.Kod} Alis: {seciliDoviz.Alis} Satis: {seciliDoviz.Satis}";
+
+
         }
 
         private void btnGetir_Click(object sender, EventArgs e)
         {
-            
+
             var liste = fourFactory.Firmalar;
-            lstFirmalar.DataSource = liste.OrderBy(x=>x.name).ToList(); //order by ile a dan z ye sıraladık
+            lstFirmalar.DataSource = liste.OrderBy(x => x.name).ToList(); //order by ile a dan z ye sıraladık
             lstFirmalar.DisplayMember = "name";
+        }
+
+        private Four.Venue seciliFirma;
+
+        private void lstFirmalar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstFirmalar.SelectedIndex == null) return;
+            seciliFirma = lstFirmalar.SelectedItem as Four.Venue;
+            lblFirmaAdi.Text = seciliFirma.name;
+            lblAdres.Text = seciliFirma.location.address;
+        }
+        private BrowserForm form;
+        private void btnHaritadaGoster_Click(object sender, EventArgs e)
+        {
+            if (seciliFirma == null) return;
+            string enlem = seciliFirma.location.lat.ToString().Replace(",", ".");
+            string boylam = seciliFirma.location.lng.ToString().Replace(",", ".");
+            string url = $"https://www.google.com.tr/maps/@{enlem},{boylam},19z";
+
+            //    if (form == null || form.IsDisposed)
+            //    {
+            form = new BrowserForm(new Uri(url), seciliFirma.name);
+            form.Url = new Uri(url);
+            form.Title = seciliFirma.name;   //url olmadan browser açıldığı için browser constructorına parametre koyduk
+            form.StartPosition = FormStartPosition.CenterScreen;
+            //    //form.WindowState = FormWindowState.Maximized;
+            form.ShowDialog(); //ShowDialog birden fazla ekran açılmasını engeller !!
+                               //    //Process.Start(url);  yeni sekmede açar
+                               //    }
+                               //form = form == null ? new BrowserForm(new Uri(url), seciliFirma.name) : form;
+                               //    form = form ?? new BrowserForm(new Uri(url), seciliFirma.name);
+                               //    form.StartPosition = FormStartPosition.CenterScreen;
+                               //    form.Show();
         }
     }
 }
