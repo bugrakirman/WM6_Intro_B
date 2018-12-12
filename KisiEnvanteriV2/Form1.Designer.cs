@@ -80,6 +80,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(399, 20);
             this.txtSearch.TabIndex = 21;
+            this.txtSearch.Visible = false;
             this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
             // 
             // lstKisiler

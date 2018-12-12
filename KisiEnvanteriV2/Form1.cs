@@ -252,5 +252,7 @@ namespace KisiEnvanteriV2
                 pictureBox1.Image = new Bitmap(memoryStream);
             }
         }
+
+     
     }
 }

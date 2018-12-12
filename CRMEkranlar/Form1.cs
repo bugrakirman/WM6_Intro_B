@@ -36,6 +36,7 @@ namespace CRMEkranlar
                 _frmOpen = new FrmOpen();
                 _frmOpen.MdiParent = this;
                 _frmOpen.Show();
+                var str = _frmOpen.sayilar as List<int>;
             }
         }
 
