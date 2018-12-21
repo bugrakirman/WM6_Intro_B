@@ -56,6 +56,7 @@ namespace KisiEnvanteriV2
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
             if (lstKisiler.SelectedItem == null) return;
+
             Kisi seciliKisi = (Kisi)lstKisiler.SelectedItem;// referans tip değişkenler !
 
             try
@@ -230,9 +231,11 @@ namespace KisiEnvanteriV2
                 }
             }
         }
+
         MemoryStream memoryStream = new MemoryStream();
         int bufferSize = 64;
         byte[] resimArray = new byte[64];
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             dosyaAc.Title = "bir foto seç";
