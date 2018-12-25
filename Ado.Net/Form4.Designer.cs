@@ -37,15 +37,13 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtCategoryName = new System.Windows.Forms.TextBox();
+            this.txtProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUnitsInStock = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbCategories
@@ -113,12 +111,12 @@
             this.columnHeader6.Text = "Category Name";
             this.columnHeader6.Width = 120;
             // 
-            // txtDescription
+            // txtUnitPrice
             // 
-            this.txtDescription.Location = new System.Drawing.Point(124, 263);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(268, 20);
-            this.txtDescription.TabIndex = 7;
+            this.txtUnitPrice.Location = new System.Drawing.Point(124, 263);
+            this.txtUnitPrice.Name = "txtUnitPrice";
+            this.txtUnitPrice.Size = new System.Drawing.Size(268, 20);
+            this.txtUnitPrice.TabIndex = 7;
             // 
             // label2
             // 
@@ -129,12 +127,12 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Unit Price";
             // 
-            // txtCategoryName
+            // txtProductName
             // 
-            this.txtCategoryName.Location = new System.Drawing.Point(124, 230);
-            this.txtCategoryName.Name = "txtCategoryName";
-            this.txtCategoryName.Size = new System.Drawing.Size(268, 20);
-            this.txtCategoryName.TabIndex = 5;
+            this.txtProductName.Location = new System.Drawing.Point(124, 230);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.Size = new System.Drawing.Size(268, 20);
+            this.txtProductName.TabIndex = 5;
             // 
             // label3
             // 
@@ -145,12 +143,12 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Product Name";
             // 
-            // textBox1
+            // txtUnitsInStock
             // 
-            this.textBox1.Location = new System.Drawing.Point(124, 296);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(268, 20);
-            this.textBox1.TabIndex = 9;
+            this.txtUnitsInStock.Location = new System.Drawing.Point(124, 296);
+            this.txtUnitsInStock.Name = "txtUnitsInStock";
+            this.txtUnitsInStock.Size = new System.Drawing.Size(268, 20);
+            this.txtUnitsInStock.TabIndex = 9;
             // 
             // label4
             // 
@@ -163,42 +161,25 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(465, 326);
+            this.btnSave.Location = new System.Drawing.Point(447, 293);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(124, 329);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(268, 20);
-            this.textBox2.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 332);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Category Id";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 394);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtUnitsInStock);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtDescription);
+            this.Controls.Add(this.txtUnitPrice);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtCategoryName);
+            this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lvProduct);
             this.Controls.Add(this.label1);
@@ -222,14 +203,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.TextBox txtUnitPrice;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtCategoryName;
+        private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtUnitsInStock;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label5;
     }
 }

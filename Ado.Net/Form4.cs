@@ -53,9 +53,10 @@ namespace Ado.Net
             finally { conn.Close(); } //her durumda bağlantı sonlandırılır
         }
 
+        Category secilen;
         private void cbCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Category secilen = (Category)cbCategories.SelectedItem;
+            secilen = (Category)cbCategories.SelectedItem;
             CategoryId = secilen.CategoryId;
             lvProduct.Items.Clear();
             SqlCommand comm = new SqlCommand("select ProductID,ProductName,UnitPrice,UnitsInStock,p.CategoryID,CategoryName from Products p inner join Categories c on p.CategoryID=c.CategoryID where CategoryName=@CategoryName", conn);
@@ -86,6 +87,43 @@ namespace Ado.Net
                 string hata = ex.Message;
             }
             finally { conn.Close(); } //her durumda bağlantı sonlandırılır
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (txtProductName.Text.Trim() != "")
+            {
+                SqlCommand comm = new SqlCommand("Insert into Categories(ProductName,UnitPrice,UnitsInStock,CategoryId) values (@ProductName,@UnitPrice,@UnitsInStock,@CategoryId,@CategoryName)", conn);
+                comm.Parameters.Add("@ProductName", SqlDbType.VarChar).Value = txtProductName.Text;
+                comm.Parameters.Add("@UnitPrice", SqlDbType.VarChar).Value = txtUnitPrice.Text;
+                comm.Parameters.Add("@UnitsInStock", SqlDbType.VarChar).Value = txtUnitsInStock.Text;
+                comm.Parameters.Add("@CategoryId", SqlDbType.VarChar).Value = secilen.CategoryId;
+                comm.Parameters.Add("@CategoryName", SqlDbType.VarChar).Value = secilen.CategoryName;
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+                try
+                {
+                    bool sonuc = Convert.ToBoolean(comm.ExecuteNonQuery());
+                    if (sonuc)
+                    {
+                        MessageBox.Show("kategori eklendi kayıt tamamlandı");
+                        GetAllCategories();
+                    }
+                    else
+                    {
+                        MessageBox.Show("kayıt gerçekleşmedi");
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw ex;
+                }
+                finally { conn.Close(); } //her durumda bağlantı sonlandırılır
+            }
+            else
+            {
+                MessageBox.Show("Category Name girmelisiniz", " Dikkat eksik bilgi");
+            }
         }
     }
 }
